@@ -6,10 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="574.0" 
-            xmlns="http://javafx.com/javafx/23.0.1" 
-            xmlns:fx="http://javafx.com/fxml/1" 
-            fx:controller="com.burguerVent.controller.MenuController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="574.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.burguerVent.controller.MenuController">
    <children>
       <Label alignment="CENTER" layoutX="196.0" layoutY="63.0" prefHeight="18.0" prefWidth="170.0" text="BurguerVent" textAlignment="CENTER">
          <font>
@@ -23,11 +20,11 @@
             <Glow />
          </effect>
       </Label>
-      <Button fx:id="btnComenzar" layoutX="237.0" layoutY="231.0" 
-              mnemonicParsing="false" text="Comenzar" onAction="#cambiarVentana">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Button>
+      <Button fx:id="btnComenzar" contentDisplay="BOTTOM" layoutX="202.0" layoutY="214.0" mnemonicParsing="false" onAction="#cambiarVentana" prefHeight="46.0" prefWidth="170.0" text="Comenzar">
+    <font>
+        <Font size="15.0" />
+    </font>
+</Button>
+      
    </children>
 </AnchorPane>
