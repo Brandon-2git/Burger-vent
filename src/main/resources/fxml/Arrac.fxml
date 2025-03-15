@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="708.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane layoutX="14.0" layoutY="81.0" prefHeight="117.0" prefWidth="206.0">
+         <children>
+            <ImageView fitHeight="166.0" fitWidth="206.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/arrachera.jpg" />
+               </image></ImageView>
+         </children>
+      </Pane>
+      <Label layoutX="32.0" layoutY="47.0" text="Hamburguesa de Arrachera" />
+      <Label layoutX="275.0" layoutY="94.0" prefHeight="90.0" prefWidth="350.0" text="Hamburguesa de arrachera jugosa, sazonada con especias y cocinada a la parrilla. Servida en pan fresco con lechuga, jitomate y cebolla caramelizada. Ideal para disfrutar en cualquier momento." textAlignment="JUSTIFY" wrapText="true" />
+
+
+   </children>
+</AnchorPane>
