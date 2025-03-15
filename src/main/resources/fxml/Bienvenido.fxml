@@ -20,7 +20,7 @@
             <Glow />
          </effect>
       </Label>
-      <Button fx:id="btnComenzar" contentDisplay="BOTTOM" layoutX="202.0" layoutY="214.0" mnemonicParsing="false" onAction="#cambiarVentana" prefHeight="46.0" prefWidth="170.0" text="Comenzar">
+      <Button fx:id="btnComenzar" contentDisplay="BOTTOM" layoutX="202.0" layoutY="214.0" mnemonicParsing="false"prefHeight="46.0" prefWidth="170.0" text="Comenzar">
     <font>
         <Font size="15.0" />
     </font>
