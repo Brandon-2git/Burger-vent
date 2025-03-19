@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="372.0" prefWidth="890.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1">
+   <children>
+      <Pane layoutY="11.0" prefHeight="353.0" prefWidth="882.0">
+         <children>
+            <Pane layoutX="29.0" layoutY="59.0" prefHeight="252.0" prefWidth="187.0" style="-fx-background-color: #FFA500;">
+               <children>
+                  <Button fx:id="btnAgregar1" layoutX="28.0" layoutY="213.0" mnemonicParsing="false" text="Agregar" />
+                  <Label layoutX="28.0" layoutY="6.0" style="-fx-text-fill: white;" text="Coca Cola">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <ImageView fx:id="myImage" fitHeight="156.0" fitWidth="155.0" layoutX="14.0" layoutY="37.0">
+                     <image>
+                        <Image url="@../Images/coca.png" />
+                     </image>
+                  </ImageView>
+                  <Button fx:id="btnDetalles1" layoutX="97.0" layoutY="213.0" mnemonicParsing="false" text="Detalles" />
+               </children>
+            </Pane>
+            <Pane layoutX="239.0" layoutY="59.0" prefHeight="252.0" prefWidth="167.0" style="-fx-background-color: #FFA500;">
+               <children>
+                  <Button fx:id="btnAgregar2" layoutX="14.0" layoutY="207.0" mnemonicParsing="false" text="Agregar" />
+                  <Label layoutX="37.0" layoutY="4.0" style="-fx-text-fill: white;" text="Pepsi">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <ImageView fx:id="myImage1" fitHeight="156.0" fitWidth="112.0" layoutX="28.0" layoutY="40.0">
+                     <image>
+                        <Image url="@../Images/pepsi.png" />
+                     </image>
+                  </ImageView>
+                  <Button fx:id="btnDetalles2" layoutX="94.0" layoutY="207.0" mnemonicParsing="false" text="Detalles" />
+               </children>
+            </Pane>
+            <Pane layoutX="434.0" layoutY="59.0" prefHeight="252.0" prefWidth="187.0" style="-fx-background-color: #FFA500;">
+               <children>
+                  <Label layoutX="47.0" layoutY="4.0" rotate="-0.7" style="-fx-text-fill: white;" text="Fanta">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="btnAgregar3" layoutX="27.0" layoutY="206.0" mnemonicParsing="false" text="Agregar" />
+                  <ImageView fx:id="myImage2" fitHeight="156.0" fitWidth="142.0" layoutX="23.0" layoutY="38.0">
+                     <image>
+                        <Image url="@../Images/fanta.png" />
+                     </image>
+                  </ImageView>
+                  <Button fx:id="btnDetalles" layoutX="104.0" layoutY="206.0" mnemonicParsing="false" text="Detalles" />
+               </children>
+            </Pane>
+            <Label layoutX="68.0" layoutY="25.0" text="Bebidas">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </Label>
+            <Pane layoutX="645.0" layoutY="59.0" prefHeight="252.0" prefWidth="187.0" style="-fx-background-color: #FFA500;">
+               <children>
+                  <Label layoutX="47.0" layoutY="4.0" rotate="-0.7" style="-fx-text-fill: white;" text="Sprite">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="btnAgregar31" layoutX="27.0" layoutY="206.0" mnemonicParsing="false" text="Agregar" />
+                  <ImageView fx:id="myImage21" fitHeight="156.0" fitWidth="112.0" layoutX="38.0" layoutY="40.0">
+                     <image>
+                        <Image url="@../Images/sprite.png" />
+                     </image>
+                  </ImageView>
+                  <Button fx:id="btnDetalles3" layoutX="104.0" layoutY="206.0" mnemonicParsing="false" text="Detalles" />
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

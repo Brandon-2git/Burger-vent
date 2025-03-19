@@ -1,9 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.burguerVent.view;
-import com.burguerVent.view.com.burguerVent.detalles.view.Arrachera;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -12,142 +8,151 @@ import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import org.springframework.stereotype.Component;
 
+
 @Component
 public class MenuView extends Application {
-    
-   @Override
-public void start(Stage primaryStage) {
-    // Crear el contenedor principal
-    AnchorPane root = new AnchorPane();
-    root.setStyle("-fx-background-color: #FF4500;");
-    root.setPrefSize(1152, 659);
+     @Override
+    public void start(Stage primaryStage) {
+        // AnchorPane principal
+        AnchorPane anchorPrincipal = new AnchorPane();
+        anchorPrincipal.setPrefSize(1152, 659);
+        anchorPrincipal.setStyle("-fx-background-color: white;");
 
-    // Panel 1 - Hamburguesa de Arrachera
-    Pane pane1 = createPane(30, 59, "Hamburguesa de Arrachera", "Images/arrachera.jpg","verDetalles1");
-    root.getChildren().add(pane1);
+        // BorderPane como estructura principal
+        BorderPane borderPane = new BorderPane();
+        borderPane.setPrefSize(200, 200);
+        AnchorPane.setTopAnchor(borderPane, 0.0);
+        AnchorPane.setBottomAnchor(borderPane, 0.0);
+        AnchorPane.setLeftAnchor(borderPane, 0.0);
+        AnchorPane.setRightAnchor(borderPane, 0.0);
 
-    // Panel 2 - Hamburguesa de Pollo
-    Pane pane2 = createPane(275, 59, "Hamburguesa de Pollo", "Images/pollo.jpg","verDetalles2");
-    root.getChildren().add(pane2);
+        // Sección superior
+        AnchorPane topPane = new AnchorPane();
+        topPane.setPrefSize(200, 65);
+        topPane.setStyle("-fx-background-color: white;");
 
-    // Panel 3 - Hamburguesa de Res
-    Pane pane3 = createPane(518, 59, "Hamburguesa de Res", "Images/res.jpg","verDetalles3");
-    root.getChildren().add(pane3);
+        Pane topBar = new Pane();
+        topBar.setPrefSize(200, 25);
+        topBar.setStyle("-fx-background-color: orange;");
+        AnchorPane.setTopAnchor(topBar, 0.0);
+        AnchorPane.setLeftAnchor(topBar, 0.0);
+        AnchorPane.setRightAnchor(topBar, 0.0);
 
-    // Lista de hamburguesas
-    ListView<String> listHamburguesas = new ListView<>();
-    listHamburguesas.setLayoutX(309);
-    listHamburguesas.setLayoutY(428);
-    listHamburguesas.setPrefSize(771, 123);
-    root.getChildren().add(listHamburguesas);
+        Label menuLabel = new Label("☰Menu");
+        menuLabel.setFont(new Font(18));
+        menuLabel.setLayoutX(38);
+        menuLabel.setLayoutY(36);
 
-    // Panel inferior - Total y Mi orden
-    Pane bottomPane = new Pane();
-    bottomPane.setLayoutX(309);
-    bottomPane.setLayoutY(382);
-    bottomPane.setPrefSize(771, 32);
-    bottomPane.setStyle("-fx-background-color: gray;");
-    
-    Label lblMiOrden = new Label("Mi orden");
-    lblMiOrden.setLayoutX(40);
-    lblMiOrden.setLayoutY(6);
-    lblMiOrden.setFont(new Font("System Bold", 15));
-    lblMiOrden.setStyle("-fx-text-fill: white;");
-    
-    Label lblTotal = new Label("Total:");
-    lblTotal.setLayoutX(596);
-    lblTotal.setLayoutY(7);
-    lblTotal.setStyle("-fx-text-fill: white;");
-    
-    Label txtTotal = new Label();
-    txtTotal.setLayoutX(643);
-    txtTotal.setLayoutY(8);
-    txtTotal.setPrefSize(99, 18);
-    txtTotal.setStyle("-fx-background-color: white; -fx-border-color: gray;");
-    
-    bottomPane.getChildren().addAll(lblMiOrden, lblTotal, txtTotal);
-    root.getChildren().add(bottomPane);
+        topPane.getChildren().addAll(topBar, menuLabel);
+        borderPane.setTop(topPane);
 
-    // Botón Siguiente
-    Button btnSiguiente = new Button("Comprar");
-    btnSiguiente.setLayoutX(1001);
-    btnSiguiente.setLayoutY(572);
-    root.getChildren().add(btnSiguiente);
+        // Sección izquierda (Menú de opciones)
+        AnchorPane leftPane = new AnchorPane();
+        leftPane.setPrefSize(180, 436);
+        leftPane.setStyle("-fx-background-color: orange;");
 
-    // Mostrar la ventana
-    Scene scene = new Scene(root);
-    primaryStage.setTitle("Menú de Hamburguesas");
-    primaryStage.setScene(scene);
-    primaryStage.show();
-}
+        VBox menuBox = new VBox();
+        menuBox.setPrefSize(180, 356);
+        AnchorPane.setTopAnchor(menuBox, 68.0);
+        AnchorPane.setBottomAnchor(menuBox, 170.0);
 
-private Pane createPane(double x, double y, String title, String imagePath, String buttonId) {
-    // Crear un panel para la hamburguesa
-    Pane pane = new Pane();
-    pane.setLayoutX(x);
-    pane.setLayoutY(y);
-    pane.setPrefSize(225, 200);
-    pane.setStyle("-fx-background-color: #FFA500;");
-    
-    // Label para el nombre de la hamburguesa
-    Label label = new Label(title);
-    label.setLayoutX(28);
-    label.setLayoutY(6);
-    label.setFont(new Font("System Bold", 12));
-    label.setStyle("-fx-text-fill: white;");
-    
-    // Imagen de la hamburguesa
-    ImageView imageView = new ImageView(new Image(imagePath));
-    imageView.setFitWidth(197);
-    imageView.setFitHeight(117);
-    imageView.setLayoutX(14);
-    imageView.setLayoutY(32);
-    
-    // Botón para agregar la hamburguesa
-    Button btnAgregar = new Button("Agregar");
-    btnAgregar.setLayoutX(28);
-    btnAgregar.setLayoutY(161);
-    
-    // Botón para ver los detalles
-    Button btnDetalles = new Button("Ver Detalles");
-    btnDetalles.setLayoutX(125);
-    btnDetalles.setLayoutY(161); // Asignar el ID correspondiente
-    btnDetalles.setId(buttonId); // Asignar el ID correspondiente
+        Button btnClasicas = new Button(" Hamburguesas clásicas");
+        Button btnPremium = new Button("Hamburguesas Premium");
+        Button btnBebidas = new Button("Bebidas");
 
-    
-    // Agregar manejador de eventos para los botones de detalles
-        btnDetalles.setOnAction(e -> {
-            if ("verDetalles1".equals(buttonId)) {
-                // Solo abre la ventana de detalles de la Arrachera
-                Arrachera arracheraView = new Arrachera();
-                Stage arracheraStage = new Stage();
-                try {
-                    arracheraView.start(arracheraStage);
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
-            } else if ("verDetalles2".equals(buttonId)) {
-                // Lógica para la vista de detalles de la Hamburguesa de Pollo
-                // Similar a la acción de Arrachera pero con la vista correspondiente
-                System.out.println("Ver detalles de la Hamburguesa de Pollo");
-            } else if ("verDetalles3".equals(buttonId)) {
-                // Lógica para la vista de detalles de la Hamburguesa de Res
-                // Similar a la acción de Arrachera pero con la vista correspondiente
-                System.out.println("Ver detalles de la Hamburguesa de Res");
-            }
+        for (Button btn : new Button[]{btnClasicas, btnPremium, btnBebidas}) {
+            btn.setPrefSize(180, 35);
+            btn.setStyle("-fx-background-color: -fx-text-fill: white; -fx-border-radius: 5px; -fx-border-color: white;");
+            btn.setFont(new Font("System Bold", 12));
+        }
+
+        menuBox.getChildren().addAll(btnClasicas, btnPremium, btnBebidas);
+        leftPane.getChildren().add(menuBox);
+        borderPane.setLeft(leftPane);
+
+        // Sección inferior
+        AnchorPane bottomPane = new AnchorPane();
+        bottomPane.setPrefSize(200, 140);
+
+        Pane bottomBar = new Pane();
+        bottomBar.setPrefSize(180, 162);
+        bottomBar.setStyle("-fx-background-color: orange;");
+        bottomBar.setLayoutY(-5);
+
+        ImageView logoView = new ImageView(new Image(getClass().getResourceAsStream("/Images/Logo1.png")));
+        logoView.setFitWidth(180);
+        logoView.setFitHeight(161);
+        logoView.setLayoutY(24);
+        logoView.setPreserveRatio(true);
+
+        bottomBar.getChildren().add(logoView);
+
+        Pane orderPane = new Pane();
+        orderPane.setPrefSize(972, 32);
+        orderPane.setLayoutX(180);
+        orderPane.setStyle("-fx-background-color: gray;");
+
+        Label lblMiOrden = new Label("Mi orden");
+        lblMiOrden.setLayoutX(40);
+        lblMiOrden.setLayoutY(6);
+        lblMiOrden.setStyle("-fx-text-fill: white;");
+        lblMiOrden.setFont(new Font("System Bold", 15));
+
+        Label lblTotal = new Label("Total:");
+        lblTotal.setLayoutX(669);
+        lblTotal.setLayoutY(5);
+        lblTotal.setStyle("-fx-text-fill: white;");
+
+        Label txtTotal = new Label();
+        txtTotal.setLayoutX(728);
+        txtTotal.setLayoutY(4);
+        txtTotal.setPrefSize(99, 18);
+        txtTotal.setStyle("-fx-background-color: white; -fx-border-color: gray;");
+
+        Button btnComprar = new Button("Comprar");
+        btnComprar.setLayoutX(895);
+        btnComprar.setLayoutY(1);
+        btnComprar.setStyle("-fx-background-color: #87CEEB; -fx-border-radius: 5px;");
+
+        orderPane.getChildren().addAll(lblMiOrden, lblTotal, txtTotal, btnComprar);
+
+        
+        /*Aqui esta lisview para que trabajes en la hu-3 y 4*/
+        ListView<String> listHamburguesas = new ListView<>();
+        listHamburguesas.setLayoutX(179.2);
+        listHamburguesas.setLayoutY(31.2);
+        listHamburguesas.setPrefSize(973, 126);
+        listHamburguesas.setStyle("-fx-border-radius: 10px;");
+
+        bottomPane.getChildren().addAll(bottomBar, orderPane, listHamburguesas);
+        borderPane.setBottom(bottomPane);
+
+        // Sección central (contenido dinámico)
+        Pane pnlMostrar = new Pane();
+        pnlMostrar.setPrefSize(200, 200);
+        borderPane.setCenter(pnlMostrar);
+
+        // Acción para el botón "Hamburguesas clásicas"
+        btnClasicas.setOnAction(event -> {
+            pnlMostrar.getChildren().clear();
+            ClasicasView clasicasView = new ClasicasView();
+            AnchorPane clasicasPane = clasicasView.getClasicasPane();
+            pnlMostrar.getChildren().add(clasicasPane);
+            clasicasPane.setLayoutX((pnlMostrar.getWidth() - clasicasPane.getPrefWidth()) / 2 - 80);
         });
-    
-    // Añadir todos los elementos al panel
-    pane.getChildren().addAll(label, imageView, btnAgregar, btnDetalles);
-    
-    return pane;
-}
 
+        anchorPrincipal.getChildren().add(borderPane);
+        Scene scene = new Scene(anchorPrincipal, 1152, 659);
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("Sistema de Hamburguesas");
+        primaryStage.show();
+    }
 }
-

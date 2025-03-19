@@ -1,5 +1,6 @@
 package com.burguerVent.burguerVent;
 import com.burguerVent.view.BienvenidoView;
+import com.burguerVent.view.MenuView;
 import javafx.application.Application;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
