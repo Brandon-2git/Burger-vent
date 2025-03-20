@@ -14,12 +14,20 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Component;
+
+import com.burguerVent.model.Producto;
 
 
 @Component
 public class MenuView extends Application {
-     @Override
+	
+	
+
+	     @Override
     public void start(Stage primaryStage) {
         // AnchorPane principal
         AnchorPane anchorPrincipal = new AnchorPane();
@@ -155,4 +163,6 @@ public class MenuView extends Application {
         primaryStage.setTitle("Sistema de Hamburguesas");
         primaryStage.show();
     }
+	     
+	    
 }

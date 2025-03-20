@@ -2,15 +2,25 @@ package com.burguerVent.view;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Component;
+
+import com.burguerVent.model.Producto;
 
 @Component
 public class ClasicasView {
+	
+	private List<Producto> orden = new ArrayList<>();
+    private ListView<String> listHamburguesas; // Referencia al ListView existente
 
     public AnchorPane getClasicasPane() {
         AnchorPane anchorPane = new AnchorPane();
@@ -33,6 +43,8 @@ public class ClasicasView {
         Button btnAgregar1 = new Button("Agregar");
         btnAgregar1.setLayoutX(28.0);
         btnAgregar1.setLayoutY(161.0);
+        
+    
 
         Label label1 = new Label("Hamburguesa de Arachera");
         label1.setLayoutX(28.0);

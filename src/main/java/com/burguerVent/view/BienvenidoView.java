@@ -56,7 +56,7 @@ public class BienvenidoView extends Application {
         btnComenzar.setPrefWidth(170.0);
         // Evento para abrir la ventana del menú principal
         btnComenzar.setOnAction(event -> {
-            MenuView menuView = new MenuView();
+            MenuView2 menuView = new MenuView2();
             Stage stage = new Stage();
             try {
                 menuView.start(stage);

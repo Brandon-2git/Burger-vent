@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.burguerVent.view;
+import com.burguerVent.model.Producto;
 import com.burguerVent.view.com.burguerVent.detalles.view.Arrachera;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -16,10 +17,17 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
 @Component
 public class MenuView2 extends Application {
+	
+	   // Lista para almacenar los productos agregados al carrito (orden)
+		 private List<Producto> orden = new ArrayList<>();
+		 private ListView<String> listHamburguesas; // Referencia al ListView existente
     
    @Override
 public void start(Stage primaryStage) {
@@ -41,7 +49,8 @@ public void start(Stage primaryStage) {
     root.getChildren().add(pane3);
 
     // Lista de hamburguesas
-    ListView<String> listHamburguesas = new ListView<>();
+    //ListView<String> listHamburguesas = new ListView<>();
+    listHamburguesas = new ListView<>(); 
     listHamburguesas.setLayoutX(309);
     listHamburguesas.setLayoutY(428);
     listHamburguesas.setPrefSize(771, 123);
@@ -114,6 +123,22 @@ private Pane createPane(double x, double y, String title, String imagePath, Stri
     btnAgregar.setLayoutX(28);
     btnAgregar.setLayoutY(161);
     
+ // Agregar manejador de eventos para el botón "Agregar"
+    btnAgregar.setOnAction(e -> {
+        // Crear el producto con los detalles
+        Producto producto = new Producto();
+        producto.setNombre(title);
+       // producto.setPrecio(50.0);  // El precio puede ser ajustado
+
+        // Agregar el producto a la lista de orden
+        orden.add(producto);
+
+        // Actualizar la lista de hamburguesas en la interfaz
+        actualizarLista();
+    });
+    
+    
+    
     // Botón para ver los detalles
     Button btnDetalles = new Button("Ver Detalles");
     btnDetalles.setLayoutX(125);
@@ -148,6 +173,18 @@ private Pane createPane(double x, double y, String title, String imagePath, Stri
     
     return pane;
 }
+private void actualizarLista() {
+	 // Crear la lista de nombres de productos para mostrar en el ListView
+ List<String> nombresProductos = new ArrayList<>();
+ for (Producto producto : orden) {
+     nombresProductos.add(producto.getNombre());
+ }
 
+ // Actualizar el ListView con los nombres de los productos
+ listHamburguesas.getItems().setAll(nombresProductos);
+ }
+  
 }
+
+
 
