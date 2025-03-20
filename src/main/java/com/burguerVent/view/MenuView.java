@@ -1,5 +1,10 @@
 package com.burguerVent.view;
 
+
+import com.burguerVent.controller.MenuController;
+import com.burguerVent.view.categorias.BebidasView;
+import com.burguerVent.view.categorias.ClasicasView;
+import com.burguerVent.view.categorias.PremiumView;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -13,12 +18,20 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Component;
 
 
 @Component
 public class MenuView extends Application {
+    
+    @Autowired
+    private MenuController menuController;  // Inyectar el controlador
+
+    private Button btnClasicas;
+    private Button btnPremium;
+    private Button btnBebidas;
      @Override
     public void start(Stage primaryStage) {
         // AnchorPane principal
@@ -139,7 +152,7 @@ public class MenuView extends Application {
         Pane pnlMostrar = new Pane();
         pnlMostrar.setPrefSize(200, 200);
         borderPane.setCenter(pnlMostrar);
-
+        
         // Acción para el botón "Hamburguesas clásicas"
         btnClasicas.setOnAction(event -> {
             pnlMostrar.getChildren().clear();
@@ -148,11 +161,31 @@ public class MenuView extends Application {
             pnlMostrar.getChildren().add(clasicasPane);
             clasicasPane.setLayoutX((pnlMostrar.getWidth() - clasicasPane.getPrefWidth()) / 2 - 80);
         });
-
+        
+        // Acción para el botón "Premium"
+        btnPremium.setOnAction(event -> {
+            pnlMostrar.getChildren().clear();
+            PremiumView premiumView = new PremiumView();
+            AnchorPane premiumPane = premiumView.getPremiumPane();
+            pnlMostrar.getChildren().add(premiumPane);
+            premiumPane.setLayoutX((pnlMostrar.getWidth() - premiumPane.getPrefWidth()) / 2 - 80);
+        });
+        
+        // Acción para el botón "Bebidas"
+        btnBebidas.setOnAction(event -> {
+            pnlMostrar.getChildren().clear();
+            BebidasView bebidasView = new BebidasView();
+            AnchorPane bebidasPane = bebidasView.getBebidasPane();
+            pnlMostrar.getChildren().add(bebidasPane);
+            bebidasPane.setLayoutX((pnlMostrar.getWidth() - bebidasPane.getPrefWidth()) / 2);
+        });
+        
         anchorPrincipal.getChildren().add(borderPane);
         Scene scene = new Scene(anchorPrincipal, 1152, 659);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Sistema de Hamburguesas");
         primaryStage.show();
+        
+
     }
 }
