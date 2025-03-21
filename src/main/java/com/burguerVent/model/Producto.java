@@ -42,4 +42,11 @@ public class Producto {
 	    return nombre;
 	}
     
+	public void setPrecio(double precio) {
+	    this.precio = precio;
+	}
+	
+	public double getPrecio() {
+	    return precio;
+	}
 }

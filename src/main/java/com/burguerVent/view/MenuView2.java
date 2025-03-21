@@ -37,15 +37,15 @@ public void start(Stage primaryStage) {
     root.setPrefSize(1152, 659);
 
     // Panel 1 - Hamburguesa de Arrachera
-    Pane pane1 = createPane(30, 59, "Hamburguesa de Arrachera", "Images/arrachera.jpg","verDetalles1");
+    Pane pane1 = createPane(30, 59, "Hamburguesa de Arrachera", "Images/arrachera.jpg","verDetalles1",55);
     root.getChildren().add(pane1);
 
     // Panel 2 - Hamburguesa de Pollo
-    Pane pane2 = createPane(275, 59, "Hamburguesa de Pollo", "Images/pollo.jpg","verDetalles2");
+    Pane pane2 = createPane(275, 59, "Hamburguesa de Pollo", "Images/pollo.jpg","verDetalles2",55);
     root.getChildren().add(pane2);
 
     // Panel 3 - Hamburguesa de Res
-    Pane pane3 = createPane(518, 59, "Hamburguesa de Res", "Images/res.jpg","verDetalles3");
+    Pane pane3 = createPane(518, 59, "Hamburguesa de Res", "Images/res.jpg","verDetalles3",67);
     root.getChildren().add(pane3);
 
     // Lista de hamburguesas
@@ -79,6 +79,7 @@ public void start(Stage primaryStage) {
     txtTotal.setLayoutY(8);
     txtTotal.setPrefSize(99, 18);
     txtTotal.setStyle("-fx-background-color: white; -fx-border-color: gray;");
+    txtTotal.setId("txtTotal");  // Asegúrate de asignar el ID
     
     bottomPane.getChildren().addAll(lblMiOrden, lblTotal, txtTotal);
     root.getChildren().add(bottomPane);
@@ -96,7 +97,7 @@ public void start(Stage primaryStage) {
     primaryStage.show();
 }
 
-private Pane createPane(double x, double y, String title, String imagePath, String buttonId) {
+private Pane createPane(double x, double y, String title, String imagePath, String buttonId, double precio) {
     // Crear un panel para la hamburguesa
     Pane pane = new Pane();
     pane.setLayoutX(x);
@@ -128,7 +129,7 @@ private Pane createPane(double x, double y, String title, String imagePath, Stri
         // Crear el producto con los detalles
         Producto producto = new Producto();
         producto.setNombre(title);
-       // producto.setPrecio(50.0);  // El precio puede ser ajustado
+        producto.setPrecio(precio);  // El precio puede ser ajustado
 
         // Agregar el producto a la lista de orden
         orden.add(producto);
@@ -175,13 +176,20 @@ private Pane createPane(double x, double y, String title, String imagePath, Stri
 }
 private void actualizarLista() {
 	 // Crear la lista de nombres de productos para mostrar en el ListView
+	
  List<String> nombresProductos = new ArrayList<>();
+
  for (Producto producto : orden) {
-     nombresProductos.add(producto.getNombre());
+    // nombresProductos.add(producto.getNombre());
+	 nombresProductos.add(producto.getNombre() + " ($" + producto.getPrecio() + ")");
+	
  }
 
  // Actualizar el ListView con los nombres de los productos
  listHamburguesas.getItems().setAll(nombresProductos);
+ 
+
+ 
  }
   
 }
