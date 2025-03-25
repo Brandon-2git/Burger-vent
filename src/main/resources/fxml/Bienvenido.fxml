@@ -6,13 +6,20 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="574.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.burguerVent.controller.MenuController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="574.0" 
+    xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" 
+    fx:controller="controller.Controller">
+    
    <children>
-      <Label alignment="CENTER" layoutX="196.0" layoutY="63.0" prefHeight="18.0" prefWidth="170.0" text="BurguerVent" textAlignment="CENTER">
+      <Label alignment="CENTER" layoutX="196.0" layoutY="63.0" 
+          prefHeight="18.0" prefWidth="170.0" text="BurguerVent" textAlignment="CENTER">
          <font>
             <Font name="System Bold" size="21.0" />
-         </font></Label>
-      <Label alignment="CENTER" layoutX="196.0" layoutY="138.0" prefHeight="18.0" prefWidth="170.0" text="Bienvenido">
+         </font>
+      </Label>
+      
+      <Label alignment="CENTER" layoutX="196.0" layoutY="138.0" 
+          prefHeight="18.0" prefWidth="170.0" text="Bienvenido">
          <font>
             <Font size="20.0" />
          </font>
@@ -20,11 +27,14 @@
             <Glow />
          </effect>
       </Label>
-      <Button fx:id="btnComenzar" contentDisplay="BOTTOM" layoutX="202.0" layoutY="214.0" mnemonicParsing="false"prefHeight="46.0" prefWidth="170.0" text="Comenzar">
-    <font>
-        <Font size="15.0" />
-    </font>
-</Button>
+      
+      <Button fx:id="btnComenzar" contentDisplay="BOTTOM" layoutX="202.0" 
+          layoutY="214.0" mnemonicParsing="false" prefHeight="46.0" 
+          prefWidth="170.0" text="Comenzar">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
       
    </children>
 </AnchorPane>

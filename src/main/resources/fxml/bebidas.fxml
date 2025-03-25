@@ -23,7 +23,7 @@
                   </Label>
                   <ImageView fx:id="myImage" fitHeight="156.0" fitWidth="155.0" layoutX="14.0" layoutY="37.0">
                      <image>
-                        <Image url="@../Images/coca.png" />
+                        <Image url="@../../../../../../burguerVent/Burger-vent/src/main/resources/Images/coca.png" />
                      </image>
                   </ImageView>
                   <Button fx:id="btnDetalles1" layoutX="97.0" layoutY="213.0" mnemonicParsing="false" text="Detalles" />
@@ -39,7 +39,7 @@
                   </Label>
                   <ImageView fx:id="myImage1" fitHeight="156.0" fitWidth="112.0" layoutX="28.0" layoutY="40.0">
                      <image>
-                        <Image url="@../Images/pepsi.png" />
+                        <Image url="@../../../../../../burguerVent/Burger-vent/src/main/resources/Images/pepsi.png" />
                      </image>
                   </ImageView>
                   <Button fx:id="btnDetalles2" layoutX="94.0" layoutY="207.0" mnemonicParsing="false" text="Detalles" />
@@ -55,7 +55,7 @@
                   <Button fx:id="btnAgregar3" layoutX="27.0" layoutY="206.0" mnemonicParsing="false" text="Agregar" />
                   <ImageView fx:id="myImage2" fitHeight="156.0" fitWidth="142.0" layoutX="23.0" layoutY="38.0">
                      <image>
-                        <Image url="@../Images/fanta.png" />
+                        <Image url="@../../../../../../burguerVent/Burger-vent/src/main/resources/Images/fanta.png" />
                      </image>
                   </ImageView>
                   <Button fx:id="btnDetalles" layoutX="104.0" layoutY="206.0" mnemonicParsing="false" text="Detalles" />
@@ -76,7 +76,7 @@
                   <Button fx:id="btnAgregar31" layoutX="27.0" layoutY="206.0" mnemonicParsing="false" text="Agregar" />
                   <ImageView fx:id="myImage21" fitHeight="156.0" fitWidth="112.0" layoutX="38.0" layoutY="40.0">
                      <image>
-                        <Image url="@../Images/sprite.png" />
+                        <Image url="@../../../../../../burguerVent/Burger-vent/src/main/resources/Images/sprite.png" />
                      </image>
                   </ImageView>
                   <Button fx:id="btnDetalles3" layoutX="104.0" layoutY="206.0" mnemonicParsing="false" text="Detalles" />

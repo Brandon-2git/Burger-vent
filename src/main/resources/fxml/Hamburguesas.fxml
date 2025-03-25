@@ -22,7 +22,7 @@
                   </Label>
                   <ImageView fx:id="myImage" fitHeight="117.0" fitWidth="197.0" layoutX="14.0" layoutY="32.0">
                      <image>
-                        <Image url="@../Images/arrachera.jpg" />
+                        <Image url="@../../../../../../burguerVent/Burger-vent/src/main/resources/Images/arrachera.jpg" />
                      </image>
                   </ImageView>
                   <Button fx:id="btnDetalles1" layoutX="137.0" layoutY="161.0" mnemonicParsing="false" text="Detalles" />
@@ -38,7 +38,7 @@
                   </Label>
                   <ImageView fx:id="myImage1" fitHeight="117.0" fitWidth="197.0" layoutX="15.0" layoutY="31.0">
                      <image>
-                        <Image url="@../Images/pollo.jpg" />
+                        <Image url="@../../../../../../burguerVent/Burger-vent/src/main/resources/Images/pollo.jpg" />
                      </image>
                   </ImageView>
                   <Button fx:id="btnDetalles2" layoutX="136.0" layoutY="161.0" mnemonicParsing="false" text="Detalles" />
@@ -54,7 +54,7 @@
                   <Button fx:id="btnAgregar3" layoutX="35.0" layoutY="161.0" mnemonicParsing="false" text="Agregar" />
                   <ImageView fx:id="myImage2" fitHeight="117.0" fitWidth="197.0" layoutX="21.0" layoutY="26.0">
                      <image>
-                        <Image url="@../Images/res.jpg" />
+                        <Image url="@../../../../../../burguerVent/Burger-vent/src/main/resources/Images/res.jpg" />
                      </image>
                   </ImageView>
                   <Button fx:id="btnDetalles" layoutX="151.0" layoutY="161.0" mnemonicParsing="false" text="Detalles" />
