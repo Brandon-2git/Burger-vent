@@ -13,6 +13,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -27,8 +28,9 @@ public class MenuView2 extends Application {
 	
 	   // Lista para almacenar los productos agregados al carrito (orden)
 		 private List<Producto> orden = new ArrayList<>();
-		 private ListView<String> listHamburguesas; // Referencia al ListView existente
-    
+		 private ListView<HBox> listHamburguesas; 
+		 private Label txtTotal;
+		 
    @Override
 public void start(Stage primaryStage) {
     // Crear el contenedor principal
@@ -74,12 +76,14 @@ public void start(Stage primaryStage) {
     lblTotal.setLayoutY(7);
     lblTotal.setStyle("-fx-text-fill: white;");
     
-    Label txtTotal = new Label();
+    
+    txtTotal = new Label();
     txtTotal.setLayoutX(643);
     txtTotal.setLayoutY(8);
     txtTotal.setPrefSize(99, 18);
     txtTotal.setStyle("-fx-background-color: white; -fx-border-color: gray;");
-    txtTotal.setId("txtTotal");  // Asegúrate de asignar el ID
+   
+    
     
     bottomPane.getChildren().addAll(lblMiOrden, lblTotal, txtTotal);
     root.getChildren().add(bottomPane);
@@ -89,6 +93,7 @@ public void start(Stage primaryStage) {
     btnSiguiente.setLayoutX(1001);
     btnSiguiente.setLayoutY(572);
     root.getChildren().add(btnSiguiente);
+    
 
     // Mostrar la ventana
     Scene scene = new Scene(root);
@@ -124,18 +129,18 @@ private Pane createPane(double x, double y, String title, String imagePath, Stri
     btnAgregar.setLayoutX(28);
     btnAgregar.setLayoutY(161);
     
- // Agregar manejador de eventos para el botón "Agregar"
     btnAgregar.setOnAction(e -> {
         // Crear el producto con los detalles
         Producto producto = new Producto();
         producto.setNombre(title);
-        producto.setPrecio(precio);  // El precio puede ser ajustado
-
+        producto.setPrecio(precio); 
         // Agregar el producto a la lista de orden
         orden.add(producto);
 
         // Actualizar la lista de hamburguesas en la interfaz
         actualizarLista();
+        // Actualizar el total
+        actualizarTotal();
     });
     
     
@@ -143,11 +148,10 @@ private Pane createPane(double x, double y, String title, String imagePath, Stri
     // Botón para ver los detalles
     Button btnDetalles = new Button("Ver Detalles");
     btnDetalles.setLayoutX(125);
-    btnDetalles.setLayoutY(161); // Asignar el ID correspondiente
-    btnDetalles.setId(buttonId); // Asignar el ID correspondiente
+    btnDetalles.setLayoutY(161); 
+    btnDetalles.setId(buttonId); 
 
     
-    // Agregar manejador de eventos para los botones de detalles
         btnDetalles.setOnAction(e -> {
             if ("verDetalles1".equals(buttonId)) {
                 // Solo abre la ventana de detalles de la Arrachera
@@ -159,38 +163,72 @@ private Pane createPane(double x, double y, String title, String imagePath, Stri
                     ex.printStackTrace();
                 }
             } else if ("verDetalles2".equals(buttonId)) {
-                // Lógica para la vista de detalles de la Hamburguesa de Pollo
-                // Similar a la acción de Arrachera pero con la vista correspondiente
+                
                 System.out.println("Ver detalles de la Hamburguesa de Pollo");
             } else if ("verDetalles3".equals(buttonId)) {
-                // Lógica para la vista de detalles de la Hamburguesa de Res
-                // Similar a la acción de Arrachera pero con la vista correspondiente
+              
                 System.out.println("Ver detalles de la Hamburguesa de Res");
             }
         });
     
-    // Añadir todos los elementos al panel
+   
     pane.getChildren().addAll(label, imageView, btnAgregar, btnDetalles);
     
     return pane;
 }
+
+private void actualizarTotal() {
+    double total = 0;
+    for (Producto producto : orden) {
+        total += producto.getPrecio();
+    }
+
+    // Actualizar el precio de txtTotal 
+    txtTotal.setText("$" + total);  
+}
+
 private void actualizarLista() {
-	 // Crear la lista de nombres de productos para mostrar en el ListView
-	
- List<String> nombresProductos = new ArrayList<>();
+    // Crear la lista de nombres de productos para mostrar en el ListView
+    List<HBox> items = new ArrayList<>();
 
- for (Producto producto : orden) {
-    // nombresProductos.add(producto.getNombre());
-	 nombresProductos.add(producto.getNombre() + " ($" + producto.getPrecio() + ")");
-	
- }
+    for (Producto producto : orden) {
+       
+        String itemText = producto.getNombre() + " ($" + producto.getPrecio() + ")";
 
- // Actualizar el ListView con los nombres de los productos
- listHamburguesas.getItems().setAll(nombresProductos);
+        // Crear el botón de eliminación
+        Button btnEliminar = new Button("Eliminar");
+        btnEliminar.setOnAction(e -> {
+            eliminarProductoDelCarrito(producto); // Eliminar el producto al hacer clic
+        });
+
  
+        HBox hbox = new HBox(10); // Espaciado entre el texto y el botón
+        hbox.getChildren().addAll(new Label(itemText), btnEliminar); // Añadir el texto y el botón al HBox
 
- 
- }
+        // Añadir el HBox al ListView
+        items.add(hbox);
+    }
+
+    // Actualizar el ListView con los elementos nuevos
+    listHamburguesas.getItems().setAll(items);
+
+    // Actualizar el total después de cambiar la lista
+    actualizarTotal();
+}
+
+private void eliminarProductoDelCarrito(Producto producto) {
+    // Eliminar el producto de la lista de orden
+    orden.remove(producto);
+
+    // Volver a actualizar la lista de hamburguesas
+    actualizarLista();
+}
+
+
+
+
+
+
   
 }
 
