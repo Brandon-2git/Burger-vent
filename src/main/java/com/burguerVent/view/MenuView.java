@@ -1,6 +1,7 @@
 package com.burguerVent.view;
 
 import com.burguerVent.controller.MenuController;
+import com.burguerVent.view.MetodoPagoView.Pago;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -125,12 +126,29 @@ public class MenuView extends Application {
         txtTotal.setPrefSize(99, 18);
         txtTotal.setStyle("-fx-background-color: white; -fx-border-color: gray;");
 
+        //agregar el boton de pagar
+        Button btnPagar = new Button("Pagar");
+        btnPagar.setLayoutX(850);
+        btnPagar.setLayoutY(1);
+        btnPagar.setStyle("-fx-background-color: #87CEEB; -fx-border-radius: 5px;");
+        
+        // Agregar evento al botón de pago
+        btnPagar.setOnAction(e -> {
+            try {
+                Pago pago = new Pago();
+                Stage stage = new Stage();
+                pago.start(stage);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
+
         Button btnComprar = new Button("Comprar");
         btnComprar.setLayoutX(895);
         btnComprar.setLayoutY(1);
         btnComprar.setStyle("-fx-background-color: #87CEEB; -fx-border-radius: 5px;");
 
-        orderPane.getChildren().addAll(lblMiOrden, lblTotal, txtTotal, btnComprar);
+        orderPane.getChildren().addAll(lblMiOrden, lblTotal, txtTotal, btnPagar, btnComprar);
 
         ListView<String> listHamburguesas = new ListView<>();
         listHamburguesas.setLayoutX(179.2);
