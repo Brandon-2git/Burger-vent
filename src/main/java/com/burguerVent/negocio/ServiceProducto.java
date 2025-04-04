@@ -88,7 +88,7 @@ public class ServiceProducto {
     }
 
 
-    private void limpiarOrden() {
+    public void limpiarOrden() {
         orden.clear();
         itemsOrden.clear();
         totalOrden = 0.0;

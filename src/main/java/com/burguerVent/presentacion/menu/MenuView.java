@@ -152,10 +152,18 @@ public class MenuView {
         btnComprar.setLayoutY(1);
         btnComprar.setStyle("-fx-background-color: #87CEEB; -fx-border-radius: 5px;");
 
-        orderPane.getChildren().addAll(lblMiOrden, lblTotal, txtTotal, btnComprar);
+         Button btnCancelar = new Button("Cancelar");
+         btnCancelar.setLayoutX(830); // Justo a la derecha de btnComprar
+         btnCancelar.setLayoutY(1);
+         btnCancelar.setStyle("-fx-background-color: #FF7F7F; -fx-border-radius: 5px;");
+       
+        
+        orderPane.getChildren().addAll(lblMiOrden, lblTotal, txtTotal, btnComprar, btnCancelar);
         
         
         btnComprar.setOnAction(e -> menuController.finalizarPedido());
+        
+        btnCancelar.setOnAction(e -> menuController.cancelarpedido());
        
 
         listHamburguesas = new ListView<>();

@@ -75,8 +75,14 @@ public class MenuController {
         actualizarTotal();
     }
     
+public void cancelarpedido() {
+    	serviceproducto.limpiarOrden();
+    	actualizarTotal();
+    }
     }
 
+
+    
 
 //	
 //	 
