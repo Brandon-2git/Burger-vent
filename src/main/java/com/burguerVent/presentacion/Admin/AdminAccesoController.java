@@ -11,13 +11,13 @@ import org.springframework.stereotype.Component;
  *
  * @author Brandon
  */
-
+@Component
 public class AdminAccesoController {
     @Autowired
     private AdminAcceso adminAcceso;
     
     public void inicia() {
-
+        adminAcceso.muestra(this);
     }
 
 }

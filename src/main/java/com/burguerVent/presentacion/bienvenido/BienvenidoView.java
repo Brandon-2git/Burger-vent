@@ -1,6 +1,7 @@
 package com.burguerVent.presentacion.bienvenido;
 
 import com.burguerVent.presentacion.Admin.AdminAcceso;
+import com.burguerVent.presentacion.Admin.AdminAccesoController;
 import com.burguerVent.presentacion.menu.MenuController;
 import javafx.application.Platform;
 import javafx.scene.Scene;
@@ -20,11 +21,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class BienvenidoView {
     private Stage stage;
+    
     private BienvenidoController controlBienvenido;
     private boolean initialized = false;
     @Autowired
     private MenuController menuController;  // Inyectamos el controlador de Menu
-
+    @Autowired
+    private AdminAccesoController adminController;
+    
+    
     public BienvenidoView() {
         // Constructor vacío
     }
@@ -110,9 +115,8 @@ public class BienvenidoView {
         //Boton que acciona el evento de cambiar de pagina
         btnProfile.setOnAction(event -> {
            
-            // Cambiar a la vista del menú
-            AdminAcceso controlAcceso = new AdminAcceso();
-            controlAcceso.muestra(); // Esto abrirá una nueva ventana para el menú
+            // Cambiar a una interfaz de acceso
+            adminController.inicia();
             stage.close(); // Esto cierra la ventana de BienvenidoView
         });
         

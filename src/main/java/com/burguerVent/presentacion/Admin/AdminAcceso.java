@@ -14,6 +14,9 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Component
 public class AdminAcceso {
     // Credenciales predefinidas
     private final String usuarioCorrecto = "admin";
@@ -23,9 +26,10 @@ public class AdminAcceso {
     private TextField textFieldUser;
     private PasswordField passwordField;
     private Button btnAcceso;
+  
     @Autowired
     private BienvenidoController controlBienvenido;
-    @Autowired
+    
     private AdminAccesoController controlAcceso;
     private Stage stage;
     private boolean initialized = false;
@@ -60,16 +64,11 @@ public class AdminAcceso {
         btnRegresar.setOnMouseExited(event -> {
             btnRegresar.setStyle("-fx-background-color: red; -fx-text-fill: white;");
         });
-        
+        /*Accion para volver a la pantalla de bienvenido por si el admin no quiere acceder*/
         btnRegresar.setOnAction(event -> {
-            
-            if (controlBienvenido != null) {
-                System.out.println("Regresando a la pantalla de bienvenida...");
-                controlBienvenido.inicia(); // Muestra la vista de bienvenida
-                stage.close(); // Cierra la ventana actual
-            } else {
-                System.out.println("Error: controlBienvenido es null");
-            }
+
+            controlBienvenido.inicia(); // Esto abrirá una nueva ventana para el menú
+            stage.close();
         });
 
     
@@ -171,9 +170,10 @@ public class AdminAcceso {
         alerta.showAndWait();
     }
 
-    public void muestra() {
+    public void muestra(AdminAccesoController control) {
+        this.controlAcceso = control;
         if (!Platform.isFxApplicationThread()) {
-            Platform.runLater(() -> this.muestra());
+            Platform.runLater(() -> this.muestra(control));
             return;
         }
             initializeUI();
