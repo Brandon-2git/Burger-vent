@@ -2,6 +2,8 @@ package com.burguerVent.presentacion.menu;
 
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -26,7 +28,8 @@ public class MenuController {
     @Autowired
     private ServiceProducto serviceproducto;
     
-    private ListView<String> listHamburguesas;
+     private ListView<String> listHamburguesas;
+     
     
     private Label txtTotal; // El Label donde se muestra el total
   
@@ -37,6 +40,8 @@ public class MenuController {
         // Enlazar la lista observable al ListView desde el servicio
         this.listHamburguesas.setItems(serviceproducto.obtenerItemsOrden());
     }
+    
+
 
     // Método para agregar una hamburguesa clásica a la orden
    

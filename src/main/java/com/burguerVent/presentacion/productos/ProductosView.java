@@ -214,6 +214,9 @@ public class ProductosView {
         btnAgregar1.setOnAction(e -> {
        	 Producto producto1 = new Producto("Hamburguesa a la BBQ", 80.0);
            menuController.agregarPremium(producto1); // Usar el controlador para agregar el producto
+           Button btnelimina3 = new Button("Agregar");
+           btnAgregar1.setLayoutX(29.0);
+           btnAgregar1.setLayoutY(172.0);
        });
 
         // Crear y configurar el segundo Pane (Hamburguesa buffalo chicken)

@@ -37,6 +37,10 @@ public class ServiceProducto {
     }
 
     // Método para obtener la lista observable de productos en la orden
+  /*  public ObservableList<String> obtenerItemsOrden() {
+        return itemsOrden;
+    } */
+    
     public ObservableList<String> obtenerItemsOrden() {
         return itemsOrden;
     }
