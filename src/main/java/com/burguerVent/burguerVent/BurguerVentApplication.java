@@ -1,5 +1,5 @@
 package com.burguerVent.burguerVent;
-import com.burguerVent.presentacion.Admin.AdminAccesoController;
+import com.burguerVent.presentacion.InterfazAdmin.InterfazAdminController;
 import com.burguerVent.presentacion.bienvenido.BienvenidoController;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -68,6 +68,8 @@ public class BurguerVentApplication {
     private BienvenidoController bienvenidoController;
 //    @Autowired
 //    private AdminAccesoController accesoController;
+//    @Autowired
+//    private InterfazAdminController adminUiController;
 
     public void inicia() {
         Platform.runLater(() -> {

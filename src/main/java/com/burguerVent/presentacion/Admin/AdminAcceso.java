@@ -1,5 +1,6 @@
 package com.burguerVent.presentacion.Admin;
 
+import com.burguerVent.presentacion.InterfazAdmin.InterfazAdminController;
 import com.burguerVent.presentacion.bienvenido.BienvenidoController;
 import javafx.application.Platform;
 import javafx.geometry.Pos;
@@ -29,6 +30,8 @@ public class AdminAcceso {
   
     @Autowired
     private BienvenidoController controlBienvenido;
+    @Autowired
+    private InterfazAdminController adminUiController;
     
     private AdminAccesoController controlAcceso;
     private Stage stage;
@@ -151,12 +154,14 @@ public class AdminAcceso {
         initialized = true;
     }
     
-        private void autenticarUsuario() {
+    private void autenticarUsuario() {
         String usuarioIngresado = textFieldUser.getText();
         String contraseñaIngresada = passwordField.getText();
 
         if (usuarioIngresado.equals(usuarioCorrecto) && contraseñaIngresada.equals(contraseñaCorrecta)) {
-            mostrarAlerta("Acceso permitido", "Bienvenido, " + usuarioCorrecto, Alert.AlertType.INFORMATION);
+            //aqui se manda a la interfaz para el usuario
+            adminUiController.inicia();
+            stage.close(); // Esto cierra la ventana de BienvenidoView
         } else {
             mostrarAlerta("Acceso denegado", "Usuario o contraseña incorrectos", Alert.AlertType.ERROR);
         }

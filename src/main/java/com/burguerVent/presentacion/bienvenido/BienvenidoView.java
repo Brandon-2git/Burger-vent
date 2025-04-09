@@ -1,6 +1,5 @@
 package com.burguerVent.presentacion.bienvenido;
 
-import com.burguerVent.presentacion.Admin.AdminAcceso;
 import com.burguerVent.presentacion.Admin.AdminAccesoController;
 import com.burguerVent.presentacion.menu.MenuController;
 import javafx.application.Platform;

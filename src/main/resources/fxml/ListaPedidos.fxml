@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="354.0" prefWidth="598.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="39.0" layoutY="22.0" prefHeight="17.0" prefWidth="149.0" text="Pedidos" />
+      <ListView layoutX="33.0" layoutY="93.0" prefHeight="232.0" prefWidth="543.0" />
+      <HBox layoutX="33.0" layoutY="64.0" prefHeight="29.0" prefWidth="543.0" style="-fx-background-color: #d3d3d3;">
+         <children>
+            <Label contentDisplay="CENTER" prefHeight="40.0" prefWidth="54.0" text="     Id" />
+            <Label prefHeight="30.0" prefWidth="170.0" text="Detalles" />
+            <Label prefHeight="30.0" prefWidth="94.0" text="Costo" />
+            <Label prefHeight="30.0" prefWidth="116.0" text="estado" />
+            <Label prefHeight="40.0" prefWidth="54.0" text="Fecha" />
+         </children>
+      </HBox>
+   </children>
+</Pane>
