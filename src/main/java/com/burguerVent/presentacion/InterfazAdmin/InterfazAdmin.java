@@ -1,4 +1,3 @@
-
 package com.burguerVent.presentacion.InterfazAdmin;
 import javafx.application.Platform;
 import javafx.geometry.Pos;
@@ -12,8 +11,14 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.springframework.stereotype.Component;
+
 /**
- *
+ * Clase encargada de construir y mostrar la interfaz principal del administrador.
+ * Esta interfaz permite al administrador acceder a distintas funciones como:
+ * - Ver pedidos
+ * - Deshabilitar productos
+ * - Modificar precios
+ * - Cerrar sesión
  */
 @Component
 public class InterfazAdmin {
@@ -23,102 +28,111 @@ public class InterfazAdmin {
     private InterfazAdminController AdminUiController;
     
     
-    
+    /**
+     * Inicializa la interfaz de administrador si aún no ha sido construida.
+     * Se asegura de ejecutarse en el hilo de JavaFX.
+     */
     private void initializeUI() {
-    if (adminInitialized) {
-        return;
+        if (adminInitialized) {
+            return;
+        }
+        if (!Platform.isFxApplicationThread()) {
+            Platform.runLater(this::initializeUI);
+            return;
+        }
+
+        adminStage = new Stage();
+        adminStage.setTitle("Panel de Administrador");
+
+        // Root AnchorPane
+        AnchorPane root = new AnchorPane();
+        root.setPrefSize(958, 465);
+        root.setStyle("-fx-background-color: orange;");
+
+        // BorderPane (puedes añadirle contenido luego si es necesario)
+        BorderPane adminPanel = new BorderPane();
+        adminPanel.setId("adminPanel");
+        root.getChildren().add(adminPanel);
+
+        // HBox con Label
+        HBox hBox = new HBox(20);
+        hBox.setLayoutX(61.0);
+        hBox.setLayoutY(65.0);
+        hBox.setAlignment(Pos.CENTER_LEFT);
+        hBox.setStyle("-fx-background-color: #ff6347; -fx-padding: 10;");
+        Label lblAdmin = new Label(" 👤Administrador");
+        lblAdmin.setStyle("-fx-font-size: 20px; -fx-text-fill: white;");
+        hBox.getChildren().add(lblAdmin);
+
+        // VBox con botones
+        VBox vBox = new VBox(10);
+        vBox.setLayoutX(47.0);
+        vBox.setLayoutY(130.0);
+        vBox.setPrefWidth(200.0);
+        vBox.setStyle("-fx-padding: 15;");
+
+        Button btnVerPedidos = new Button("📋 Ver Pedidos");
+        btnVerPedidos.setPrefWidth(180);
+
+        Button btnDeshabilitarProducto = new Button("🛑 Deshabilitar Producto");
+        btnDeshabilitarProducto.setPrefWidth(180);
+
+        Button btnModificarPrecios = new Button("💰 Modificar Precios");
+        btnModificarPrecios.setPrefWidth(180);
+
+        Button btnCerrarSesion = new Button("🔓 Cerrar Sesión");
+        btnCerrarSesion.setPrefWidth(180);
+        btnCerrarSesion.setOnAction(event -> {
+            adminStage.close();
+        });
+
+        vBox.getChildren().addAll(
+            btnVerPedidos,
+            btnDeshabilitarProducto,
+            btnModificarPrecios,
+            btnCerrarSesion
+        );
+
+        // Pane blanco central
+        Pane contentPane = new Pane();
+        contentPane.setLayoutX(285.0);
+        contentPane.setLayoutY(52.0);
+        contentPane.setPrefSize(598.0, 354.0);
+        contentPane.setStyle("-fx-background-color: white;");
+
+        //accion del bton ver pedidos
+        btnVerPedidos.setOnAction(event -> {
+            // Limpiar el panel antes de agregar la vista de los pedidos
+            contentPane.getChildren().clear();
+            // Crear una nueva instancia de la clase donde se tiene el pane
+            OpcionesInterfaz pedidos = new OpcionesInterfaz();
+            pedidos.setMenuController(AdminUiController);
+            //ahora obtenemos el pane de la clase
+            Pane pedidosPane = pedidos.getPedidosPane();
+            contentPane.getChildren().add(pedidosPane);
+        });
+
+        // Agregar nodos al root
+        root.getChildren().addAll(hBox, vBox, contentPane);
+
+        Scene scene = new Scene(root);
+        adminStage.setScene(scene);
+        adminInitialized = true;
     }
-    if (!Platform.isFxApplicationThread()) {
-        Platform.runLater(this::initializeUI);
-        return;
-    }
 
-    adminStage = new Stage();
-    adminStage.setTitle("Panel de Administrador");
-
-    // Root AnchorPane
-    AnchorPane root = new AnchorPane();
-    root.setPrefSize(958, 465);
-    root.setStyle("-fx-background-color: orange;");
-
-    // BorderPane (puedes añadirle contenido luego si es necesario)
-    BorderPane adminPanel = new BorderPane();
-    adminPanel.setId("adminPanel");
-    root.getChildren().add(adminPanel);
-
-    // HBox con Label
-    HBox hBox = new HBox(20);
-    hBox.setLayoutX(61.0);
-    hBox.setLayoutY(65.0);
-    hBox.setAlignment(Pos.CENTER_LEFT);
-    hBox.setStyle("-fx-background-color: #ff6347; -fx-padding: 10;");
-    Label lblAdmin = new Label(" 👤Administrador");
-    lblAdmin.setStyle("-fx-font-size: 20px; -fx-text-fill: white;");
-    hBox.getChildren().add(lblAdmin);
-
-    // VBox con botones
-    VBox vBox = new VBox(10);
-    vBox.setLayoutX(47.0);
-    vBox.setLayoutY(130.0);
-    vBox.setPrefWidth(200.0);
-    vBox.setStyle("-fx-padding: 15;");
-
-    Button btnVerPedidos = new Button("📋 Ver Pedidos");
-    btnVerPedidos.setPrefWidth(180);
-
-    Button btnDeshabilitarProducto = new Button("🛑 Deshabilitar Producto");
-    btnDeshabilitarProducto.setPrefWidth(180);
-
-    Button btnModificarPrecios = new Button("💰 Modificar Precios");
-    btnModificarPrecios.setPrefWidth(180);
-
-    Button btnCerrarSesion = new Button("🔓 Cerrar Sesión");
-    btnCerrarSesion.setPrefWidth(180);
-    btnCerrarSesion.setOnAction(event -> {
-        adminStage.close();
-    });
-
-    vBox.getChildren().addAll(
-        btnVerPedidos,
-        btnDeshabilitarProducto,
-        btnModificarPrecios,
-        btnCerrarSesion
-    );
-
-    // Pane blanco central
-    Pane contentPane = new Pane();
-    contentPane.setLayoutX(285.0);
-    contentPane.setLayoutY(52.0);
-    contentPane.setPrefSize(598.0, 354.0);
-    contentPane.setStyle("-fx-background-color: white;");
-    
-    //accion del bton ver pedidos
-    btnVerPedidos.setOnAction(event -> {
-        // Limpiar el panel antes de agregar la vista de los pedidos
-        contentPane.getChildren().clear();
-        // Crear una nueva instancia de la clase donde se tiene el pane
-        OpcionesInterfaz pedidos = new OpcionesInterfaz();
-        pedidos.setMenuController(AdminUiController);
-        //ahora obtenemos el pane de la clase
-        Pane pedidosPane = pedidos.getPedidosPane();
-        contentPane.getChildren().add(pedidosPane);
-    });
-
-    // Agregar nodos al root
-    root.getChildren().addAll(hBox, vBox, contentPane);
-
-    Scene scene = new Scene(root);
-    adminStage.setScene(scene);
-    adminInitialized = true;
-}
-
-public void muestraAdmin(InterfazAdminController control) {
-    this.AdminUiController = control;
-    if (!Platform.isFxApplicationThread()) {
-        Platform.runLater(() -> this.muestraAdmin(control));
-        return;
-    }
-        initializeUI();
-        adminStage.show();
+    /**
+     * Muestra la interfaz gráfica del administrador.
+     * Si se llama desde un hilo que no es de JavaFX, delega la ejecución correctamente.
+     *
+     * @param control Controlador de la interfaz administrativa
+     */
+    public void muestraAdmin(InterfazAdminController control) {
+        this.AdminUiController = control;
+        if (!Platform.isFxApplicationThread()) {
+            Platform.runLater(() -> this.muestraAdmin(control));
+            return;
+        }
+            initializeUI();
+            adminStage.show();
     }
 }

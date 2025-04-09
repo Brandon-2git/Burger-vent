@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.burguerVent.presentacion.InterfazAdmin;
 
 import javafx.scene.control.Label;
@@ -9,14 +5,27 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
+/**
+ * Clase que representa la vista de opciones dentro de la interfaz de administrador.
+ * Actualmente, implementa la vista de pedidos en un panel gráfico.
+ */
 public class OpcionesInterfaz {
     
     private InterfazAdminController AdminUi;
-    //Método para inyectar el controlador
+    
+    /**
+     * Método para establecer el controlador de la interfaz de administrador.
+     * 
+     * @param AdminUIController instancia del controlador principal de la interfaz admin
+     */
     public void setMenuController(InterfazAdminController AdminUIController) {
         this.AdminUi = AdminUIController;
     }
     
+    /**
+     * Genera y retorna un panel (`Pane`) que representa la lista de pedidos del administrador.
+     * @return Pane con la interfaz gráfica para mostrar los pedidos
+     */
     public Pane getPedidosPane() {
         // Crear el Pane principal
         Pane pedidosPane = new Pane();
@@ -74,4 +83,6 @@ public class OpcionesInterfaz {
 
         return pedidosPane;
     }
+    
+    //Aqui se agregaran los demas paneles para cada opcion de los botones de la interfaz del administrador
 }

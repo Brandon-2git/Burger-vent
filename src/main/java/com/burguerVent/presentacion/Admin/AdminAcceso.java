@@ -17,6 +17,10 @@ import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+/** 
+ * Clase encargada de mostrar la interfaz de inicio de sesión del administrador.
+ * Valida credenciales y redirige a la interfaz administrativa si son correctas.
+ */
 @Component
 public class AdminAcceso {
     // Credenciales predefinidas
@@ -37,10 +41,16 @@ public class AdminAcceso {
     private Stage stage;
     private boolean initialized = false;
 
+    /*
+     * Constructor vacío requerido por Spring para la inyección de dependencias.
+    */
     public AdminAcceso() {
         // Constructor vacío
     }
 
+     /**
+     * Inicializa la interfaz gráfica del login de administrador.
+     */
     private void initializeUI() {
          if (initialized) return;
         if (!Platform.isFxApplicationThread()) {
@@ -154,6 +164,10 @@ public class AdminAcceso {
         initialized = true;
     }
     
+     /**
+     * Metodo que verifica si las credenciales ingresadas coinciden con las predefinidas.
+     * Si son válidas, abre la interfaz administrativa.
+     */
     private void autenticarUsuario() {
         String usuarioIngresado = textFieldUser.getText();
         String contraseñaIngresada = passwordField.getText();
@@ -167,6 +181,13 @@ public class AdminAcceso {
         }
     }
 
+    /**
+     * Muestra una alerta emergente con el mensaje proporcionado.
+     * 
+     * @param titulo Título de la alerta
+     * @param mensaje Contenido del mensaje
+     * @param tipo Tipo de alerta (ERROR, INFORMATION, etc.)
+     */
     private void mostrarAlerta(String titulo, String mensaje, Alert.AlertType tipo) {
         Alert alerta = new Alert(tipo);
         alerta.setTitle(titulo);
@@ -175,6 +196,10 @@ public class AdminAcceso {
         alerta.showAndWait();
     }
 
+    /*
+     * Método público para mostrar la interfaz de login de administrador.
+     * Recibe un controlador de acceso (puede ser usado para manejar eventos externos).
+    */
     public void muestra(AdminAccesoController control) {
         this.controlAcceso = control;
         if (!Platform.isFxApplicationThread()) {
