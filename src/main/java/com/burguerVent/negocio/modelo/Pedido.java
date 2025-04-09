@@ -5,6 +5,7 @@ import java.util.List;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -15,27 +16,28 @@ import jakarta.persistence.OneToMany;
 public class Pedido {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long idPedido;
+	private int idPedido;
 
 	private double costoTotal;
 	
 	//@OneToMany // Relación: Un pedido puede tener muchos productos
 	 //@JoinColumn(name = "idPedido")
-	 @OneToMany(cascade = CascadeType.PERSIST)
+	// @OneToMany(cascade = CascadeType.PERSIST)
+	@OneToMany(targetEntity = Producto.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
 	private List <Producto> productos = new ArrayList <> ();
 	
 	
 	 /**
      * @return the idPedido
      */
-    public long getIdPedido() {
+    public int getIdPedido() {
         return idPedido;
     }
 
     /**
      * @param idPedido the idPedido to set
      */
-    public void setIdPedido(long idPedido) {
+    public void setIdPedido(int idPedido) {
         this.idPedido = idPedido;
     }
 
