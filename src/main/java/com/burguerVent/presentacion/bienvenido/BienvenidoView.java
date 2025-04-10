@@ -136,6 +136,7 @@ public class BienvenidoView {
             Platform.runLater(() -> this.muestra(control));
             return;
         }
+        
         initializeUI();
         stage.show();
     }

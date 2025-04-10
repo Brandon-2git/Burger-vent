@@ -2,8 +2,11 @@ package com.burguerVent.presentacion.menu;
 
 
 
+import com.burguerVent.negocio.modelo.Producto;
 import com.burguerVent.presentacion.productos.ProductosView;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -12,6 +15,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -232,12 +236,34 @@ public class MenuView {
 
         stage.show();
         
-        menuController.setListHamburguesas(listHamburguesas);
-        menuController.setTxtTotal(txtTotal);
+       
+       // menuController.setListHamburguesas(listHamburguesas);
+      
+     //   menuController.setTxtTotal(txtTotal);
+        
+    
     }
     
-        
+    public void actualizarListaProductos(List<String> itemsOrden) {
+        this.listHamburguesas.getItems().setAll(itemsOrden);
+    }
+    
+
+    
+    public void actualizarTotal(double total) {
+        this.txtTotal.setText(String.format("%.2f", total));
+    }
+    
+    public void setListHamburguesas(ListView<String> listHamburguesas) {
+        this.listHamburguesas = listHamburguesas;
+    }
+
+    public void setTxtTotal(Label txtTotal) {
+        this.txtTotal = txtTotal;
+    }
+    
 }
+
 
 
 //        

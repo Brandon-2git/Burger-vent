@@ -7,43 +7,35 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.burguerVent.datos.PedidoRepository;
-import com.burguerVent.datos.ProductoRepository;
 import com.burguerVent.negocio.modelo.Pedido;
 import com.burguerVent.negocio.modelo.Producto;
-
-
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 
 @Service
 public class ServiceProducto {
 
 	private List<Producto> orden = new ArrayList<>();
-    private ObservableList<String> itemsOrden = FXCollections.observableArrayList();
+	private List<String> productosorden = new ArrayList<>();
     private double totalOrden = 0.0;
     
     @Autowired
     private PedidoRepository pedidoRepository;
-    @Autowired
-    private ProductoRepository productorepository;
+    
     
    
     // Método para agregar un producto a la orden
     public void agregarProducto(Producto producto) {
         orden.add(producto);  // Agregar el producto a la lista de la orden
-        //itemsOrden.add(producto.getNombre() + " - $" + producto.getPrecio()); // Agregar a la lista observable
-        actualizarItemsOrden(producto);
+        actualizarproductosOrden(producto);
         totalOrden += producto.getPrecio(); // Actualizar el total de la orden
     }
 
-    // Método para obtener la lista observable de productos en la orden
-  /*  public ObservableList<String> obtenerItemsOrden() {
-        return itemsOrden;
-    } */
     
-    public ObservableList<String> obtenerItemsOrden() {
-        return itemsOrden;
+    public List<String> obtenerproductosorden() {
+      
+        return productosorden;
+    	
     }
+
 
     // Método para obtener el total de la orden
     public double obtenerTotal() {
@@ -54,30 +46,7 @@ public class ServiceProducto {
     public List<Producto> obtenerOrden() {
         return orden;
     }
-    
-    private void actualizarItemsOrden(Producto producto) {
-        // Verificar si el producto ya está en la lista
-        boolean encontrado = false;
-        for (int i = 0; i < itemsOrden.size(); i++) {
-            String item = itemsOrden.get(i);
-            if (item.contains(producto.getNombre())) {
-                // Actualizar la cantidad si el producto ya existe
-                String[] partes = item.split(" - \\$");
-                int cantidad = Integer.parseInt(partes[0].split("x")[0].trim()) + 1;
-                itemsOrden.set(i, +cantidad+ "x " + producto.getNombre() + " - $" + producto.getPrecio() * cantidad);
-                encontrado = true;
-                break;
-            }
-        }
-
-        // Si el producto no está en la lista, agregarlo
-        if (!encontrado) {
-            
-            itemsOrden.add("1x " + producto.getNombre() + " - $" + producto.getPrecio());
-        }
-    }
-    
-    
+   
     public void guardarPedido() {
         if (!orden.isEmpty()) {
             // Crear un nuevo pedido
@@ -94,8 +63,31 @@ public class ServiceProducto {
 
     public void limpiarOrden() {
         orden.clear();
-        itemsOrden.clear();
+        productosorden.clear();
+       // itemsOrden.clear();
         totalOrden = 0.0;
+    }
+    
+    public void actualizarproductosOrden(Producto producto) {
+        // Verificar si el producto ya está en la lista
+        boolean encontrado = false;
+        for (int i = 0; i < productosorden.size(); i++) {
+            String item = productosorden.get(i);
+            if (item.contains(producto.getNombre())) {
+                // Actualizar la cantidad si el producto ya existe
+                String[] partes = item.split(" - \\$");
+                int cantidad = Integer.parseInt(partes[0].split("x")[0].trim()) + 1;
+                // Actualizar el precio con la nueva cantidad
+                productosorden.set(i, cantidad + "x " + producto.getNombre() + " - $" + (producto.getPrecio() * cantidad));
+                encontrado = true;
+                break;
+            }
+        }
+
+        // Si el producto no está en la lista, agregarlo
+        if (!encontrado) {
+            productosorden.add("1x "+producto.getNombre() + " - $" + producto.getPrecio());
+        }
     }
 
     

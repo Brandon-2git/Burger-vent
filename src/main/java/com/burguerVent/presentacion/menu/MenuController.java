@@ -9,8 +9,7 @@ import org.springframework.stereotype.Component;
 
 import com.burguerVent.negocio.ServiceProducto;
 import com.burguerVent.negocio.modelo.Producto;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
+
 
 
 @Component
@@ -28,63 +27,53 @@ public class MenuController {
     @Autowired
     private ServiceProducto serviceproducto;
     
-     private ListView<String> listHamburguesas;
-     
-    
-    private Label txtTotal; // El Label donde se muestra el total
-  
+   
 
-    // Método para configurar el ListView en el controlador
-    public void setListHamburguesas(ListView<String> listHamburguesas) {
-        this.listHamburguesas = listHamburguesas;
-        // Enlazar la lista observable al ListView desde el servicio
-        this.listHamburguesas.setItems(serviceproducto.obtenerItemsOrden());
+    
+    public void actualizarVista() {
+        List<String> productosorden = serviceproducto.obtenerproductosorden();
+        double total = serviceproducto.obtenerTotal();
+        menuView.actualizarListaProductos(productosorden);
+        menuView.actualizarTotal(total);
     }
-    
-
 
     // Método para agregar una hamburguesa clásica a la orden
    
     public void agregarClasica(Producto producto) {
         // Llamar al servicio para agregar el producto
         serviceproducto.agregarProducto(producto);
-        actualizarTotal();
+        actualizarVista();
     }
     
     // Método para agregar una hamburguesa premium  a la orden
     public void agregarPremium(Producto producto) {
         // Llamar al servicio para agregar el producto
         serviceproducto.agregarProducto(producto);
-        actualizarTotal();
+        actualizarVista();
     }
     
     // // Método para agregar una bebida a la orden
     public void agregarBebidas(Producto producto) {
         // Llamar al servicio para agregar el producto
         serviceproducto.agregarProducto(producto);
-        actualizarTotal();
+        actualizarVista();
     }
     
-    public void setTxtTotal(Label txtTotal) {
-        this.txtTotal = txtTotal;
-  
-   }
-    
-    public void actualizarTotal() {
-        double total = serviceproducto.obtenerTotal();
-        txtTotal.setText(String.format("%.2f", total)); // Actualiza el texto del Label
-    }
     
     public void finalizarPedido() {
         serviceproducto.guardarPedido();
-        actualizarTotal();
+        actualizarVista();
+        
     }
     
 public void cancelarpedido() {
     	serviceproducto.limpiarOrden();
-    	actualizarTotal();
+    	  actualizarVista();
     }
+
+
     }
+
 
 
     
