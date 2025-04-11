@@ -1,81 +1,92 @@
 package com.burguerVent.presentacion.menu;
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.burguerVent.negocio.ServiceProducto;
 import com.burguerVent.negocio.modelo.Producto;
+import com.burguerVent.presentacion.resumen.ResumenPedidoController;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-
+import javafx.application.Platform;
 
 @Component
 public class MenuController {
     
-    
     @Autowired
     private MenuView menuView;
     
-    public void inicia() {
-
-        menuView.muestra(this);
-    }
-
+    @Autowired
+    private ResumenPedidoController resumenPedidoController;
+    
     @Autowired
     private ServiceProducto serviceproducto;
     
     private ListView<String> listHamburguesas;
-    
-    private Label txtTotal; // El Label donde se muestra el total
-  
+    private Label txtTotal;
 
-    // Método para configurar el ListView en el controlador
+    public void inicia() {
+        menuView.muestra(this);
+    }
+
     public void setListHamburguesas(ListView<String> listHamburguesas) {
         this.listHamburguesas = listHamburguesas;
-        // Enlazar la lista observable al ListView desde el servicio
         this.listHamburguesas.setItems(serviceproducto.obtenerItemsOrden());
     }
 
-    // Método para agregar una hamburguesa clásica a la orden
-   
     public void agregarClasica(Producto producto) {
-        // Llamar al servicio para agregar el producto
         serviceproducto.agregarProducto(producto);
         actualizarTotal();
     }
     
-    // Método para agregar una hamburguesa premium  a la orden
     public void agregarPremium(Producto producto) {
-        // Llamar al servicio para agregar el producto
         serviceproducto.agregarProducto(producto);
         actualizarTotal();
     }
     
-    // // Método para agregar una bebida a la orden
     public void agregarBebidas(Producto producto) {
-        // Llamar al servicio para agregar el producto
         serviceproducto.agregarProducto(producto);
         actualizarTotal();
     }
     
     public void setTxtTotal(Label txtTotal) {
         this.txtTotal = txtTotal;
-  
-   }
+    }
     
     public void actualizarTotal() {
         double total = serviceproducto.obtenerTotal();
-        txtTotal.setText(String.format("%.2f", total)); // Actualiza el texto del Label
+        txtTotal.setText(String.format("%.2f", total));
     }
     
     public void finalizarPedido() {
-        serviceproducto.guardarPedido();
-        actualizarTotal();
+        Platform.runLater(() -> {
+            var items = serviceproducto.obtenerItemsOrden();
+            double total = serviceproducto.obtenerTotal();
+            
+            if (items != null && !items.isEmpty()) {
+                // Limpiar la vista anterior
+                resumenPedidoController.limpiarVista();
+                
+                // Mostrar la vista de resumen
+                resumenPedidoController.mostrarVista();
+                
+                // Agregar los items al resumen
+                for (String item : items) {
+                    resumenPedidoController.agregarItem(item);
+                }
+                resumenPedidoController.setPrecioTotal(total);
+                
+                // Guardar el pedido y limpiar la vista actual
+                serviceproducto.guardarPedido();
+                txtTotal.setText("0.00");
+                serviceproducto.limpiarOrden();
+                listHamburguesas.getItems().clear();
+            } else {
+                resumenPedidoController.mostrarMensaje("No hay items en el pedido");
+            }
+        });
     }
-    
-    }
+}
 
 
 //	
@@ -100,7 +111,7 @@ public class MenuController {
 //    	//itemsOrden.add(producto.getNombre() + " - $" + producto.getPrecio()); // Agregar a la lista observable
 //    	 actualizarItemsOrden(producto);
 //    	 totalOrden += producto.getPrecio(); // Sumar el precio
-//    	    actualizarTotal(); // Actualizar la etiqueta del total
+//   	    actualizarTotal(); // Actualizar la etiqueta del total
 //    }
 //    
 //    public void agregarPremium(Producto producto) {
