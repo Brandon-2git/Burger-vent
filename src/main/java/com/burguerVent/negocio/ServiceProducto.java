@@ -60,7 +60,7 @@ public class ServiceProducto {
                 // Actualizar la cantidad si el producto ya existe
                 String[] partes = item.split(" - \\$");
                 int cantidad = Integer.parseInt(partes[0].split("x")[0].trim()) + 1;
-                itemsOrden.set(i, +cantidad+ "x " + producto.getNombre() + " - $" + producto.getPrecio() * cantidad);
+                itemsOrden.set(i, cantidad + "x " + producto.getNombre() + " - $" + String.format("%.2f", producto.getPrecio() * cantidad));
                 encontrado = true;
                 break;
             }
@@ -68,8 +68,7 @@ public class ServiceProducto {
 
         // Si el producto no está en la lista, agregarlo
         if (!encontrado) {
-            
-            itemsOrden.add("1x " + producto.getNombre() + " - $" + producto.getPrecio());
+            itemsOrden.add("1x " + producto.getNombre() + " - $" + String.format("%.2f", producto.getPrecio()));
         }
     }
     
@@ -88,7 +87,7 @@ public class ServiceProducto {
     }
 
 
-    private void limpiarOrden() {
+    public void limpiarOrden() {
         orden.clear();
         itemsOrden.clear();
         totalOrden = 0.0;

@@ -19,7 +19,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
  */
 @SpringBootApplication
 @ComponentScan(basePackages = "com.burguerVent")
-@EntityScan(basePackages = {"com.burguerVent.negocio.modelo"})
+@EntityScan(basePackages = {"com.burguerVent.modelo", "com.burguerVent.negocio.modelo"})
 @EnableJpaRepositories("com.burguerVent.datos")
 public class BurguerVentApplication {
 
