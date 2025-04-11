@@ -92,7 +92,40 @@ public class ServiceProducto {
         itemsOrden.clear();
         totalOrden = 0.0;
     }
+    
+    public void cancelarPedido() {
+    	limpiarOrden(); 
+    }
+    
+    //metodo para eliminar el producto de la lista de la orden
+    public void eliminarProducto(String nombre) {
+        
+        // Eliminar el producto de la lista de productosorden
+        for (int i = 0; i < itemsOrden.size();) {
+            String producto = itemsOrden.get(i);
+            if (producto.contains(nombre)) {
+            	itemsOrden.remove(i); // Elimina si contiene el nombre buscado
+                // No se incrementa i, porque al eliminar el elemento actual, el siguiente ocupa su lugar
+            }else {
+            	i++; // Solo se incrementa si no se elimina
+            }
+        }
+    
+              // Eliminar el producto de la lista de orden
+        for (int i = 0; i <orden.size();) {
+            Producto producto = orden.get(i);
+            if (producto.getNombre().equals(nombre)) {
+            	totalOrden -= producto.getPrecio();// Actualiza el total restando el precio del producto eliminado
+                orden.remove(i); // Elimina el producto de la lista
 
+              
+               
+            }else {
+            	i++;
+            }
+        }
+    
+    }
     
    
     

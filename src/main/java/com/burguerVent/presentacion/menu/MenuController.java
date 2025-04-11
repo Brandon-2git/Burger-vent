@@ -58,6 +58,18 @@ public class MenuController {
         txtTotal.setText(String.format("%.2f", total));
     }
     
+    public void cancelarpedido() {
+        serviceproducto.cancelarPedido();
+        	 actualizarTotal();
+        }
+        
+        public void eliminarProducto(String nombre) {
+            serviceproducto.eliminarProducto(nombre);
+            actualizarTotal();
+        }
+        
+        
+    
     public void finalizarPedido() {
         Platform.runLater(() -> {
             var items = serviceproducto.obtenerItemsOrden();
@@ -86,7 +98,8 @@ public class MenuController {
             }
         });
     }
-}
+    
+   }
 
 
 //	

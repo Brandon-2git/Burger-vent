@@ -9,6 +9,7 @@ import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -161,12 +162,18 @@ public class MenuView {
         btnComprar.setLayoutX(915);
         btnComprar.setLayoutY(1);
         btnComprar.setStyle("-fx-background-color: #87CEEB; -fx-border-radius: 5px;");
+        Button btnCancelar = new Button("Cancelar");
+        btnCancelar.setLayoutX(830); // Justo a la derecha de btnComprar
+        btnCancelar.setLayoutY(1);
+        btnCancelar.setStyle("-fx-background-color: #FF7F7F; -fx-border-radius: 5px;");
 
-        orderPane.getChildren().addAll(lblMiOrden, lblTotal, txtTotal, btnComprar, btnComprar2);
+        orderPane.getChildren().addAll(lblMiOrden, lblTotal, txtTotal, btnComprar,btnComprar2, btnCancelar);
         
         
         btnComprar.setOnAction(e -> menuController.finalizarPedido());
         
+        
+        btnCancelar.setOnAction(e -> menuController.cancelarpedido());
         
         btnComprar2.setOnAction(event -> { 
      	   control.inicia();
@@ -180,6 +187,33 @@ public class MenuView {
         listHamburguesas.setLayoutY(31.2);
         listHamburguesas.setPrefSize(973, 126);
         listHamburguesas.setStyle("-fx-border-radius: 10px;");
+        listHamburguesas.setCellFactory(lv -> new ListCell<String>() {
+            //@Override
+             protected void updateItem(String producto, boolean empty) {
+                 super.updateItem(producto, empty);
+                 if (empty || producto == null) {
+                     setText(null);
+                     setGraphic(null);
+                 } else {
+                     // Establecer el texto del producto en el ListView
+                     setText(producto);
+
+                     // Crear el botón de eliminar
+                     Button btnEliminar = new Button("Eliminar");
+                     btnEliminar.setStyle("-fx-background-color: #FF7F7F; -fx-text-fill: white;");
+                     btnEliminar.setOnAction(event -> {
+ 
+                         String nombreProducto = producto.split(" - ")[0].split("x")[1].trim(); //obtiene solo el nombre del producto
+                      menuController.eliminarProducto(nombreProducto); //elimina el producto de la orden
+
+
+                     });
+
+                     // Agregar el botón de eliminar a la celda
+                     setGraphic(btnEliminar);
+                 }
+             }
+         });
 
         bottomPane.getChildren().addAll(bottomBar, orderPane, listHamburguesas);
         borderPane.setBottom(bottomPane);
