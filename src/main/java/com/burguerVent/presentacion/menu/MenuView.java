@@ -3,6 +3,8 @@ package com.burguerVent.presentacion.menu;
 
 
 import com.burguerVent.presentacion.productos.ProductosView;
+import com.burguerVent.presentacion.recibirpedidos.ControlRecibirPedido;
+
 import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -17,7 +19,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 
@@ -28,6 +30,9 @@ public class MenuView {
     private ListView<String> listHamburguesas;
 
     private MenuController menuController;
+    
+    @Autowired
+    private ControlRecibirPedido control;
     
 
     private Button btnClasicas;
@@ -151,11 +156,23 @@ public class MenuView {
         btnComprar.setLayoutX(895);
         btnComprar.setLayoutY(1);
         btnComprar.setStyle("-fx-background-color: #87CEEB; -fx-border-radius: 5px;");
+        
+        Button btnComprar2 = new Button("Comprar2");
+        btnComprar.setLayoutX(915);
+        btnComprar.setLayoutY(1);
+        btnComprar.setStyle("-fx-background-color: #87CEEB; -fx-border-radius: 5px;");
 
-        orderPane.getChildren().addAll(lblMiOrden, lblTotal, txtTotal, btnComprar);
+        orderPane.getChildren().addAll(lblMiOrden, lblTotal, txtTotal, btnComprar, btnComprar2);
         
         
         btnComprar.setOnAction(e -> menuController.finalizarPedido());
+        
+        
+        btnComprar2.setOnAction(event -> { 
+     	   control.inicia();
+     	   control.actualizarPedidos();
+     	   
+     	   });
        
 
         listHamburguesas = new ListView<>();
