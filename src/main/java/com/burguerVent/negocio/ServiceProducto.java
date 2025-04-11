@@ -10,11 +10,16 @@ import com.burguerVent.datos.PedidoRepository;
 import com.burguerVent.negocio.modelo.Pedido;
 import com.burguerVent.negocio.modelo.Producto;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 @Service
 public class ServiceProducto {
 
 	private List<Producto> orden = new ArrayList<>();
-	private List<String> productosorden = new ArrayList<>();
+	private List<String> itemsOrden = new ArrayList<>();
+	
+
     private double totalOrden = 0.0;
     
     @Autowired
@@ -25,7 +30,7 @@ public class ServiceProducto {
     // Método para agregar un producto a la orden
     public void agregarProducto(Producto producto) {
         orden.add(producto);  // Agregar el producto a la lista de la orden
-        actualizarproductosOrden(producto);
+        actualizaritemsOrden(producto);
         totalOrden += producto.getPrecio(); // Actualizar el total de la orden
     }
     
@@ -35,7 +40,7 @@ public class ServiceProducto {
     
     public List<String> obtenerproductosorden() {
       
-        return productosorden;
+        return itemsOrden;
     	
     }
     
@@ -68,21 +73,21 @@ public class ServiceProducto {
 
     public void limpiarOrden() {
         orden.clear();
-        productosorden.clear();
+        itemsOrden.clear();
         totalOrden = 0.0;
     }
     
-    public void actualizarproductosOrden(Producto producto) {
+    public void actualizaritemsOrden(Producto producto) {
         // Verificar si el producto ya está en la lista
         boolean encontrado = false;
-        for (int i = 0; i < productosorden.size(); i++) {
-            String item = productosorden.get(i);
+        for (int i = 0; i < itemsOrden.size(); i++) {
+            String item = itemsOrden.get(i);
             if (item.contains(producto.getNombre())) {
                 // Actualizar la cantidad si el producto ya existe
                 String[] partes = item.split(" - \\$");
                 int cantidad = Integer.parseInt(partes[0].split("x")[0].trim()) + 1;
                 // Actualizar el precio con la nueva cantidad
-                productosorden.set(i, cantidad + "x " + producto.getNombre() + " - $" + (producto.getPrecio() * cantidad));
+                itemsOrden.set(i, cantidad + "x " + producto.getNombre() + " - $" + (producto.getPrecio() * cantidad));
                 encontrado = true;
                 break;
             }
@@ -90,7 +95,7 @@ public class ServiceProducto {
 
         // Si el producto no está en la lista, agregarlo
         if (!encontrado) {
-            productosorden.add("1x "+producto.getNombre() + " - $" + producto.getPrecio());
+        	itemsOrden.add("1x "+producto.getNombre() + " - $" + producto.getPrecio());
         }
     }
     
@@ -98,10 +103,10 @@ public class ServiceProducto {
     public void eliminarProducto(String nombre) {
         
         // Eliminar el producto de la lista de productosorden
-        for (int i = 0; i < productosorden.size();) {
-            String producto = productosorden.get(i);
+        for (int i = 0; i < itemsOrden.size();) {
+            String producto = itemsOrden.get(i);
             if (producto.contains(nombre)) {
-                productosorden.remove(i); // Elimina si contiene el nombre buscado
+            	itemsOrden.remove(i); // Elimina si contiene el nombre buscado
                 // No se incrementa i, porque al eliminar el elemento actual, el siguiente ocupa su lugar
             }else {
             	i++; // Solo se incrementa si no se elimina
