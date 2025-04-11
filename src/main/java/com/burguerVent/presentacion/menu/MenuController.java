@@ -31,7 +31,7 @@ public class MenuController {
 
     
     public void actualizarVista() {
-        List<String> productosorden = serviceproducto.obtenerproductosorden();
+       List<String> productosorden = serviceproducto.obtenerproductosorden();
         double total = serviceproducto.obtenerTotal();
         menuView.actualizarListaProductos(productosorden);
         menuView.actualizarTotal(total);
@@ -65,12 +65,24 @@ public class MenuController {
         actualizarVista();
         
     }
-    
+ 
+ //metodo para cancelar un pedido(borrar toda la orden)
 public void cancelarpedido() {
+	    //llama al servicio para limpiar la orden y dejar el total en 0
     	serviceproducto.limpiarOrden();
+    	//actualizar vista para reflejar los cambios 
     	  actualizarVista();
     }
 
+//Elimina un producto de la orden en el servicio y actualiza la vista.
+public void eliminarproducto(String producto) {
+	 // Elimina el producto de la orden a través del servicio
+	 serviceproducto.eliminarProducto(producto);
+	 // Actualiza la vista para reflejar los cambios en la lista y el total
+	 actualizarVista();
+	  
+	
+}
 
     }
 

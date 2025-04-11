@@ -2,36 +2,37 @@ package com.burguerVent.presentacion.menu;
 
 
 
+
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.text.Font;
+
 import com.burguerVent.negocio.modelo.Producto;
 import com.burguerVent.presentacion.productos.ProductosView;
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
-
-import java.util.ArrayList;
 import java.util.List;
+import javafx.scene.control.ListCell;
+import javafx.scene.layout.HBox;
+
 
 import org.springframework.stereotype.Component;
-
 
 
 @Component
 public class MenuView {
  
-    private ListView<String> listHamburguesas;
+   private ListView<String> listHamburguesas;
+
+
 
     private MenuController menuController;
     
@@ -50,12 +51,14 @@ public class MenuView {
     }
 
     private void initializeUI() {
+
         if (initialized) {
             return;
         }
         if (!Platform.isFxApplicationThread()) {
             Platform.runLater(this::initializeUI);
             return;
+
         }
 
         stage = new Stage();
@@ -177,7 +180,39 @@ public class MenuView {
         listHamburguesas.setLayoutY(31.2);
         listHamburguesas.setPrefSize(973, 126);
         listHamburguesas.setStyle("-fx-border-radius: 10px;");
+        
+        listHamburguesas.setCellFactory(lv -> new ListCell<String>() {
+            //@Override
+             protected void updateItem(String producto, boolean empty) {
+                 super.updateItem(producto, empty);
+                 if (empty || producto == null) {
+                     setText(null);
+                     setGraphic(null);
+                 } else {
+                     // Establecer el texto del producto en el ListView
+                     setText(producto);
 
+                     // Crear el botón de eliminar
+                     Button btnEliminar = new Button("Eliminar");
+                     btnEliminar.setStyle("-fx-background-color: #FF7F7F; -fx-text-fill: white;");
+                     btnEliminar.setOnAction(event -> {
+ 
+                         String nombreProducto = producto.split(" - ")[0].split("x")[1].trim(); //obtiene solo el nombre del producto
+                         menuController.eliminarproducto(nombreProducto); //elimina el producto de la orden
+
+
+                     });
+
+                     // Agregar el botón de eliminar a la celda
+                     setGraphic(btnEliminar);
+                 }
+             }
+         });
+            
+        	
+
+        
+        
         bottomPane.getChildren().addAll(bottomBar, orderPane, listHamburguesas);
         borderPane.setBottom(bottomPane);
 
@@ -244,9 +279,9 @@ public class MenuView {
     
     }
     
-    public void actualizarListaProductos(List<String> itemsOrden) {
-        this.listHamburguesas.getItems().setAll(itemsOrden);
-    }
+   // public void actualizarListaProductos(List<String> itemsOrden) {
+     //   this.listHamburguesas.getItems().setAll(itemsOrden);
+    //}
     
 
     
@@ -254,15 +289,39 @@ public class MenuView {
         this.txtTotal.setText(String.format("%.2f", total));
     }
     
-    public void setListHamburguesas(ListView<String> listHamburguesas) {
-        this.listHamburguesas = listHamburguesas;
-    }
+   public void setListHamburguesas(ListView<String> listHamburguesas) {
+       this.listHamburguesas = listHamburguesas;
+     }
+    
+    
+   
+   public void actualizarListaProductos(List<String> itemsOrden) {
+     this.listHamburguesas.getItems().setAll(itemsOrden);
+       
+   }
+   
+  
+	
+
 
     public void setTxtTotal(Label txtTotal) {
         this.txtTotal = txtTotal;
     }
     
+ 
+    
 }
+
+
+   
+
+
+
+    
+   
+
+    
+
 
 
 
