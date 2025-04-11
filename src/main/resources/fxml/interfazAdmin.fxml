@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane id="AnchorPane" prefHeight="465.0" prefWidth="958.0" style="-fx-background-color: orange;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <BorderPane fx:id="adminPanel" />
+      <HBox alignment="CENTER_LEFT" layoutX="61.0" layoutY="65.0" spacing="20" style="-fx-background-color: #ff6347; -fx-padding: 10;">
+          <Label style="-fx-font-size: 20px; -fx-text-fill: white;" text=" 👤Administrador" />
+      </HBox>
+      <VBox layoutX="47.0" layoutY="130.0" prefWidth="200" spacing="10" style="-fx-padding: 15;">
+          <Button fx:id="btnVerPedidos" prefWidth="180" text="📋 Ver Pedidos" />
+          <Button fx:id="btnDeshabilitarProducto" prefWidth="180" text="🛑 Deshabilitar Producto" />
+          <Button fx:id="btnModificarPrecios" prefWidth="180" text="💰 Modificar Precios" />
+          <Button fx:id="btnCerrarSesion" prefWidth="180" text="🔓 Cerrar Sesión" />
+      </VBox>
+   <Pane layoutX="285.0" layoutY="52.0" prefHeight="354.0" prefWidth="598.0" style="-fx-background-color: white;" />
+</AnchorPane>
