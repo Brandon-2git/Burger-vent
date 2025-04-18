@@ -127,6 +127,68 @@ public class ServiceProducto {
     
     }
     
+    public void aumentarCantidad(String nombre) {
+        for (int i = 0; i < itemsOrden.size(); i++) {
+            String item = itemsOrden.get(i);
+            if (item.contains(nombre)) {
+                String[] partes = item.split(" - \\$");
+                int cantidad = Integer.parseInt(partes[0].split("x")[0].trim()) + 1;
+
+                // Buscar el precio unitario desde orden
+                double precioUnitario = 0;
+                for (Producto p : orden) {
+                    if (p.getNombre().equals(nombre)) {
+                        precioUnitario = p.getPrecio();
+                        break;
+                    }
+                }
+
+                // Actualizar el item con nueva cantidad y precio total
+                String nuevoItem = cantidad + "x " + nombre + " - $" + String.format("%.2f", precioUnitario * cantidad);
+                itemsOrden.set(i, nuevoItem);
+
+                // Actualizar el total de la orden
+                totalOrden += precioUnitario;
+                break;
+            }
+        }
+    
+
+   
+    }
+    
+    public void disminuirCantidad(String nombre) {
+        for (int i = 0; i < itemsOrden.size(); i++) {
+            String item = itemsOrden.get(i);
+            if (item.contains(nombre)) {
+                String[] partes = item.split(" - \\$");
+                int cantidad = Integer.parseInt(partes[0].split("x")[0].trim());
+
+                // Buscar el precio unitario desde la lista 'orden'
+                double precioUnitario = 0;
+                for (Producto p : orden) {
+                    if (p.getNombre().equals(nombre)) {
+                        precioUnitario = p.getPrecio();
+                        break;
+                    }
+                }
+
+                // Si la cantidad es 1, eliminar el ítem
+                if (cantidad <= 1) {
+                    itemsOrden.remove(i);
+                } else {
+                    cantidad--; // Decrementar
+                    String nuevoItem = cantidad + "x " + nombre + " - $" + String.format("%.2f", precioUnitario * cantidad);
+                    itemsOrden.set(i, nuevoItem);
+                }
+
+                // Actualizar el total
+                totalOrden -= precioUnitario;
+                break;
+            }
+        }
+    }
+    
    
     
 }
