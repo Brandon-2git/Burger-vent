@@ -99,6 +99,16 @@ public class MenuController {
         });
     }
     
+    public void aumentarCantidad(String nombre) {
+        serviceproducto.aumentarCantidad(nombre);
+        actualizarTotal();
+    }
+    
+    public void disminuirCantidad(String nombre) {
+        serviceproducto.disminuirCantidad(nombre); // Llama al método del servicio
+        actualizarTotal(); // Actualiza el total en pantalla
+    }
+    
    }
 
 

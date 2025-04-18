@@ -6,6 +6,7 @@ import com.burguerVent.presentacion.productos.ProductosView;
 import com.burguerVent.presentacion.recibirpedidos.ControlRecibirPedido;
 
 import javafx.application.Platform;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -15,6 +16,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -197,6 +199,21 @@ public class MenuView {
                  } else {
                      // Establecer el texto del producto en el ListView
                      setText(producto);
+               
+                     
+                     Button btnMas = new Button("+");
+                     btnMas.setOnAction(event -> {
+                    	 String[] partes = producto.split("x", 2);
+                    	 String nombreProducto2 = partes[1].split(" - ")[0].trim();
+                        menuController.aumentarCantidad(nombreProducto2);
+                    	
+                     });
+
+                     Button btnMenos = new Button("−");
+                     btnMenos.setOnAction(event -> {
+                         String nombreProducto3 = producto.split(" - ")[0].split("x")[1].trim();
+                         menuController.disminuirCantidad(nombreProducto3);
+                     });
 
                      // Crear el botón de eliminar
                      Button btnEliminar = new Button("Eliminar");
@@ -210,7 +227,10 @@ public class MenuView {
                      });
 
                      // Agregar el botón de eliminar a la celda
-                     setGraphic(btnEliminar);
+                     //HBox botones = new HBox(5, btnMas, btnMenos, btnEliminar);
+                     HBox fila = new HBox(10, btnMas, btnMenos, btnEliminar);
+                     fila.setAlignment(Pos.CENTER_LEFT);
+                     setGraphic(fila);
                  }
              }
          });
